@@ -1,0 +1,23 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  docker:
+    compose:
+      enabled: true
+      file: compose.yml
+      lifecycle-management: start-and-stop
+      readiness:
+        timeout: 2m
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    com.fc.fcauth: debug
+    org.hibernate.SQL: debug
+    org.hibernate.orm.jdbc.bind: trace

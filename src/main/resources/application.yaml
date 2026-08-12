@@ -1,3 +1,37 @@
 spring:
   application:
     name: fc-auth
+
+  profiles:
+    default: local
+
+  docker:
+    compose:
+      # local 프로필에서만 true로 덮어쓴다.
+      enabled: false
+
+  datasource:
+    hikari:
+      pool-name: fc-auth-pool
+      connection-timeout: 30000
+      validation-timeout: 5000
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          time_zone: UTC
+          batch_size: 50
+        order_inserts: true
+        order_updates: true
+
+server:
+  shutdown: graceful
+
+logging:
+  level:
+    root: info
