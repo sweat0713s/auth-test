@@ -9,14 +9,15 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class Employee {
+public class Department {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Schema(example = "123", description = "auto increment pk")
   private Long id;
 
-  private String firstName;
+  @Schema(example = "인사팀", description = "부서 이름")
+  private String deptName;
 
-  private String lastName;
-
-  private Long departmentId;
+  @Schema(example = "123456", description = "담당 조직장 임직원 ID")
+  private Long teamLeadId;
 }

@@ -1,8 +1,8 @@
 package com.fc.fcauth.controller;
 
+import com.fc.fcauth.model.Department;
 import com.fc.fcauth.model.Employee;
-import com.fc.fcauth.service.EmployeeService;
-import io.swagger.v3.oas.annotations.Operation;
+import com.fc.fcauth.service.DepartmentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Basics", description = "기본 관리 API")
-public class EmployeeController {
+public class DepartmentController {
 
-  private final EmployeeService employeeService;
+  private final DepartmentService departmentService;
 
-  @Operation(description = "전사 부서 조회")
-  @GetMapping(value = "/employees",
-  produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<List<Employee>> listAll(){
-    return new ResponseEntity<>(employeeService.listEmployees(), HttpStatus.OK);
+  @GetMapping(value = "/departments",
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<List<Department>> listAll(){
+    return new ResponseEntity<>(departmentService.listDepartments(), HttpStatus.OK);
   }
+
 }

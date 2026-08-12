@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+#### 4. Swagger 문서와 JPA Part 2
+✅swagger 연동
+✅jpa w/ relationship
+
 #### 3. JPA를 활용한 기본 CURD 구현
 ✅ simple jpa 구현
 
