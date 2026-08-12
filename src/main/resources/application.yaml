@@ -17,7 +17,8 @@ spring:
       validation-timeout: 5000
 
   jpa:
-    open-in-view: false
+#    open-in-view: false
+    open-in-view: true #임시사용
     hibernate:
       ddl-auto: validate
     properties:
@@ -34,4 +35,4 @@ server:
 
 logging:
   level:
-    root: info
+    root: debug

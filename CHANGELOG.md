@@ -3,6 +3,16 @@
 #### 4. Swagger 문서와 JPA Part 2
 ✅swagger 연동
 ✅jpa w/ relationship
+```
+create table role (id bigint primary key auto_increment, name varchar(45));
+create table employee_role_mapping (id bigint primary key auto_increment, employee_id bigint, role_id bigint);
+
+insert into role (name) values ('인사팀');
+insert into role (name) values ('조직장');
+
+insert into employee_role_mapping(employee_id, role_id) values (1, 1);
+insert into employee_role_mapping(employee_id, role_id) values (1, 2);
+```
 
 #### 3. JPA를 활용한 기본 CURD 구현
 ✅ simple jpa 구현
