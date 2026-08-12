@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+#### 3. JPA를 활용한 기본 CURD 구현
+✅ simple jpa 구현
+
 #### 2. DB 구성
 
 ✅ spring-boot-docker-compose 디펜던시 설정
