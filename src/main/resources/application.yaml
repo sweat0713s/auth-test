@@ -33,6 +33,10 @@ spring:
 server:
   shutdown: graceful
 
+kakao:
+  client_id: e836a4ffe16e0a7b277d9c1905f63bb7
+  redirect_uri: http://localhost:8080/kakao/callback
+
 logging:
   level:
     root: info
