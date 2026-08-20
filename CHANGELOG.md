@@ -33,6 +33,20 @@ INSERT INTO api (app_id, `method`, `path`) VALUES(2, 'POST', '/meeting-rooms');
 INSERT INTO api (app_id, `method`, `path`) VALUES(2, 'DELETE', '/meeting-rooms');
 INSERT INTO api (app_id, `method`, `path`) VALUES(3, 'GET', '/vacations');
 INSERT INTO api (app_id, `method`, `path`) VALUES(3, 'POST', '/vacations');
+
+RENAME TABLE `role` TO employee_role;
+
+CREATE TABLE app_role (
+	id BIGINT auto_increment NOT NULL,
+	app_id BIGINT NOT NULL,
+	api_id BIGINT NOT NULL,
+	CONSTRAINT app_role_pk PRIMARY KEY (id),
+	CONSTRAINT app_role_api_FK FOREIGN KEY (api_id) REFERENCES api(id),
+	CONSTRAINT app_role_app_FK FOREIGN KEY (app_id) REFERENCES app(id)
+);
+
+INSERT INTO app_role (app_id, api_id) VALUES(1, 5);
+INSERT INTO app_role (app_id, api_id) VALUES(2, 1);
 ```
 #### 4-3. RBAC(Role Based Access Control)
 ✅ API 별 RBAC 설정 추가
@@ -63,11 +77,11 @@ ALTER TABLE employee MODIFY COLUMN kakao_nick_name varchar(45) CHARACTER SET utf
 ✅swagger 연동
 ✅jpa w/ relationship
 ```
-create table role (id bigint primary key auto_increment, name varchar(45));
+create table employeeRole (id bigint primary key auto_increment, name varchar(45));
 create table employee_role_mapping (id bigint primary key auto_increment, employee_id bigint, role_id bigint);
 
-insert into role (name) values ('인사팀');
-insert into role (name) values ('조직장');
+insert into employeeRole (name) values ('인사팀');
+insert into employeeRole (name) values ('조직장');
 
 insert into employee_role_mapping(employee_id, role_id) values (1, 1);
 insert into employee_role_mapping(employee_id, role_id) values (1, 2);

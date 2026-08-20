@@ -1,7 +1,7 @@
 package com.fc.fcauth.util;
 
 import com.fc.fcauth.model.Employee;
-import com.fc.fcauth.model.Role;
+import com.fc.fcauth.model.EmployeeRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
@@ -24,10 +24,10 @@ public class JwtUtil {
     Date now = new Date();
     Date expireAt = new Date(now.getTime() + EXPIRATION_TIME_MILLIS);
 
-    Set<String> roles = employee.getRoles() == null
+    Set<String> roles = employee.getEmployeeRoles() == null
         ? Set.of()
-        : employee.getRoles().stream()
-            .map(Role::getName)
+        : employee.getEmployeeRoles().stream()
+            .map(EmployeeRole::getName)
             .collect(Collectors.toSet());
 
     Map<String, Object> claims = new HashMap<>();

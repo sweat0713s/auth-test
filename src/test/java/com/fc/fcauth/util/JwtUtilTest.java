@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.fc.fcauth.model.Employee;
-import com.fc.fcauth.model.Role;
+import com.fc.fcauth.model.EmployeeRole;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -28,26 +28,26 @@ public class JwtUtilTest {
 
   @Test
   public void test_role() {
-    Role role1 = Role.builder()
+    EmployeeRole employeeRole1 = EmployeeRole.builder()
         .id(1L)
         .name("role1")
         .build();
-    Role role2 = Role.builder()
+    EmployeeRole employeeRole2 = EmployeeRole.builder()
         .id(2L)
         .name("role2")
         .build();
 
-    List<Role> roles = Arrays.asList(role1, role2);
-    Set<Role> roleSet = new HashSet<>(roles);
+    List<EmployeeRole> employeeRoles = Arrays.asList(employeeRole1, employeeRole2);
+    Set<EmployeeRole> employeeRoleSet = new HashSet<>(employeeRoles);
 
     Employee employee = Employee.builder()
-        .roles(roleSet)
+        .employeeRoles(employeeRoleSet)
         .build();
 
     String token = JwtUtil.createToken(employee);
     List res = JwtUtil.parseToken(token).get("roles", List.class);
-    assertEquals(roleSet.size(), res.size());
-    assertTrue(res.contains(role1.getName()));
-    assertTrue(res.contains(role2.getName()));
+    assertEquals(employeeRoleSet.size(), res.size());
+    assertTrue(res.contains(employeeRole1.getName()));
+    assertTrue(res.contains(employeeRole2.getName()));
   }
 }
