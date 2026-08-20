@@ -2,7 +2,6 @@ package com.fc.fcauth.service;
 
 import com.fc.fcauth.model.KakaoUserInfoRespDto;
 import com.fc.fcauth.repository.EmployeeRepository;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +17,10 @@ public class LoginService {
 
   public ResponseEntity login(String code) {
     String token = kakaoService.getAccessTokenFromKakao(code);
+    return new ResponseEntity(token, HttpStatus.OK);
+  }
+
+  public ResponseEntity getKakaoUser(String token) {
     KakaoUserInfoRespDto dto = kakaoService.getUserFromKakao(token);
     String nickName = dto.getKakaoAccount().getProfile().getNickname();
 

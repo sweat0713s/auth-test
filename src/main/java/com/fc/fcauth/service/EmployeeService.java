@@ -4,9 +4,12 @@ import com.fc.fcauth.model.Employee;
 import com.fc.fcauth.repository.EmployeeRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class EmployeeService {
@@ -14,6 +17,8 @@ public class EmployeeService {
   public final EmployeeRepository employeeRepository;
 
   public List<Employee> listEmployees() {
+    String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    log.info("Security Context Holder Name: {}", name);
     return employeeRepository.findAll();
   }
 
