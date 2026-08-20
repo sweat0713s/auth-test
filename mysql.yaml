@@ -43,6 +43,10 @@ spec:
       containers:
         - image: mysql:8
           name: mysql
+          args:
+            - --character-set-server=utf8mb4
+            - --collation-server=utf8mb4_0900_ai_ci
+            - --default-time-zone=+09:00
           resources:
             limits:
               memory: "1Gi"
@@ -51,6 +55,8 @@ spec:
               memory: "500Mi"
               cpu: "500m"
           env:
+            - name: TZ
+              value: Asia/Seoul
             - name: MYSQL_DATABASE
               valueFrom:
                 configMapKeyRef:
@@ -93,8 +99,9 @@ metadata:
   name: mysql-config
 data:
   MYSQL_DATABASE: fc_auth_db
-  MYSQL_DATABASE_URL: jdbc:mysql://mysql:3306/fc_auth_db
+  MYSQL_DATABASE_URL: "jdbc:mysql://mysql:3306/fc_auth_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul"
   initdb.sql: |
+    SET NAMES utf8mb4;
     USE fc_auth_db;
     CREATE TABLE employee (id BIGINT AUTO_INCREMENT PRIMARY KEY, first_name VARCHAR(20), last_name VARCHAR(20), department_id BIGINT);
     INSERT INTO employee (first_name, last_name, department_id) VALUES ('길동', '홍', 1), ('제니', '김', 2), ('nathan', 'kim', 1);

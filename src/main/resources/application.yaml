@@ -7,7 +7,7 @@ spring:
 
   docker:
     compose:
-      # local 프로필에서만 true로 덮어쓴다.
+      # Docker Compose는 local 프로필에서만 활성화한다.
       enabled: false
 
   datasource:
@@ -17,15 +17,12 @@ spring:
       validation-timeout: 5000
 
   jpa:
-#    open-in-view: false
-    open-in-view: true #임시사용
-    hibernate:
-      ddl-auto: validate
+    open-in-view: true
     properties:
       hibernate:
         format_sql: false
         jdbc:
-          time_zone: UTC
+          time_zone: Asia/Seoul
           batch_size: 50
         order_inserts: true
         order_updates: true
