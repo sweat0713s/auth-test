@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+#### 4-3. RBAC(Role Based Access Control)
+
+
 #### 4-2. Spring Security
 ✅ spring security 적용하기
 ✅ 토큰 검증 로직 추가
