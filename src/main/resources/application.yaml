@@ -35,6 +35,7 @@ server:
 
 kakao:
   client_id: e836a4ffe16e0a7b277d9c1905f63bb7
+  client_secret: BBiu9cUCMZ5ZcbAnWbLX6IcZCblKNozR
   redirect_uri: http://localhost:8080/kakao/callback
 
 logging:
