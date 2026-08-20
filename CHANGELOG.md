@@ -1,6 +1,10 @@
 ## CHANGELOG
 
-#### 4. Swagger 문서와 JPA Part 2
+#### 3-3. Kakao Social Login 1
+✅ 회원 등록
+✅ 카카오 소셜 로그인 지원
+
+#### 3-2. Swagger 문서와 JPA Part 2
 ✅swagger 연동
 ✅jpa w/ relationship
 ```

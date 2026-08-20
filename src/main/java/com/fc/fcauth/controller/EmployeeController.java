@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,8 +24,17 @@ public class EmployeeController {
 
   @Operation(description = "전사 부서 조회")
   @GetMapping(value = "/employees",
-  produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<List<Employee>> listAll(){
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<List<Employee>> listAll() {
     return new ResponseEntity<>(employeeService.listEmployees(), HttpStatus.OK);
+  }
+
+  @PostMapping(value = "/employees",
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Employee> create(@RequestParam String firstName,
+      @RequestParam String lastName,
+      @RequestParam Long departmentId) {
+    Employee employee = employeeService.createEmployee(firstName, lastName, departmentId);
+    return new ResponseEntity<>(employee, HttpStatus.CREATED);
   }
 }
