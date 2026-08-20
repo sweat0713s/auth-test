@@ -1,6 +1,10 @@
 ## CHANGELOG
 
-#### 4. JWT, Junit
+#### 4-2. Spring Security
+✅ spring security 적용하기
+✅ 토큰 검증 로직 추가
+
+#### 4-1. JWT, Junit
 ✅ JWT 토큰 유틸 작성 및 Junit 테스트
 
 #### 3-4. Kakao Social Login 2
