@@ -1,7 +1,9 @@
 package com.fc.fcauth.controller;
 
 import com.fc.fcauth.model.KakaoUserInfoRespDto;
+import com.fc.fcauth.repository.EmployeeRepository;
 import com.fc.fcauth.service.KakaoService;
+import com.fc.fcauth.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -14,15 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class KakaoLoginController {
-  
-  private final KakaoService kakaoService;
-  
+
+  private final LoginService loginService;
+
   @GetMapping("/kakao/callback")
   public ResponseEntity callback(@RequestParam("code") String code) {
-    String token = kakaoService.getAccessTokenFromKakao(code);
-    KakaoUserInfoRespDto dto = kakaoService.getUserFromKakao(token);
-    log.info("nickname : {}", dto.getKakaoAccount().getProfile().getNickname());
-    return new ResponseEntity(HttpStatus.OK);
+    return loginService.login(code);
+
   }
 
 }
