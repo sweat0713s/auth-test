@@ -8,12 +8,17 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import java.util.Set;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employee {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +29,8 @@ public class Employee {
   private String lastName;
 
   private Long departmentId;
+
+  private String kakaoNickName;
 
   @ManyToMany
   @JoinTable(

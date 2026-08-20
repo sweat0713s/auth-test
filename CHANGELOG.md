@@ -4,6 +4,14 @@
 ✅ 카카오 소셜 로그인 정보 확인
 ✅ 임직원 카카오 닉네임 정보 등록
 ✅ 확인된 정보가 등록된 유저의 정보인지 판단
+```
+ALTER TABLE employee ADD kakao_nick_name varchar(45) NULL;
+ALTER TABLE employee ADD CONSTRAINT employee_unique UNIQUE KEY (kakao_nick_name);
+-- kako_nick_name 입력
+ALTER TABLE employee MODIFY COLUMN kakao_nick_name varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL;
+
+
+```
 
 #### 3-3. Kakao Social Login 1
 ✅ 회원 등록
