@@ -1,7 +1,41 @@
 ## CHANGELOG
 
-#### 4-3. RBAC(Role Based Access Control)
+#### 4-4. App2app 1
+✅ 시스템 생성 및 시스템 별 기능을 API로 등록
+✅ 시스템 별 권한 세팅
 
+```
+CREATE TABLE app (
+	id BIGINT auto_increment NOT NULL,
+	name varchar(45) NOT NULL,
+	CONSTRAINT app_pk PRIMARY KEY (id),
+	CONSTRAINT app_unique UNIQUE KEY (name)
+);
+
+INSERT INTO app (name) VALUES('calendar');
+INSERT INTO app (name) VALUES('meeting-room');
+INSERT INTO app (name) VALUES('vacation');
+
+CREATE TABLE api (
+	id BIGINT auto_increment NOT NULL,
+	app_id BIGINT NOT NULL,
+	`method` varchar(45) NULL,
+	`path` varchar(45) NULL,
+	CONSTRAINT api_pk PRIMARY KEY (id),
+	CONSTRAINT api_app_FK FOREIGN KEY (app_id) REFERENCES app(id) 
+);
+
+INSERT INTO api (app_id, `method`, `path`) VALUES(1, 'GET', '/calendars');
+INSERT INTO api (app_id, `method`, `path`) VALUES(1, 'POST', '/calendars');
+INSERT INTO api (app_id, `method`, `path`) VALUES(1, 'DELETE', '/calendars');
+INSERT INTO api (app_id, `method`, `path`) VALUES(2, 'GET', '/meeting-rooms');
+INSERT INTO api (app_id, `method`, `path`) VALUES(2, 'POST', '/meeting-rooms');
+INSERT INTO api (app_id, `method`, `path`) VALUES(2, 'DELETE', '/meeting-rooms');
+INSERT INTO api (app_id, `method`, `path`) VALUES(3, 'GET', '/vacations');
+INSERT INTO api (app_id, `method`, `path`) VALUES(3, 'POST', '/vacations');
+```
+#### 4-3. RBAC(Role Based Access Control)
+✅ API 별 RBAC 설정 추가
 
 #### 4-2. Spring Security
 ✅ spring security 적용하기
