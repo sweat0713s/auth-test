@@ -1,5 +1,6 @@
 package com.fc.fcauth.util;
 
+import com.fc.fcauth.dto.ValidateTokenDto;
 import com.fc.fcauth.model.Api;
 import com.fc.fcauth.model.App;
 import com.fc.fcauth.model.AppRole;
@@ -9,11 +10,15 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.crypto.SecretKey;
 import java.util.Date;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.thymeleaf.util.StringUtils;
 
 public class JwtUtil {
 
@@ -75,5 +80,33 @@ public class JwtUtil {
         .build()
         .parseSignedClaims(token)
         .getPayload();
+  }
+
+  public static ResponseEntity<String> validateAppToken(ValidateTokenDto dto, Api api) {
+    Claims claims;
+
+    try {
+      claims = parseToken(dto.getToken());
+    } catch (Exception e) {
+      return new ResponseEntity<>("invalid token", HttpStatus.UNAUTHORIZED);
+    }
+
+    Date now = new Date();
+    if(claims.getExpiration().before(now)) {
+      return new ResponseEntity<>("token expired", HttpStatus.UNAUTHORIZED);
+    }
+
+    if(!StringUtils.equals("app", claims.get("type").toString())) {
+      return new ResponseEntity<>("invalid token type", HttpStatus.UNAUTHORIZED);
+    }
+
+    String roles = claims.get("roles").toString();
+
+    if(roles.contains(api.getId().toString())) {
+      return new ResponseEntity<>("권한이 존재합니다.", HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>("권한이 없습니다.", HttpStatus.FORBIDDEN);
+    }
+
   }
 }
